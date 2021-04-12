@@ -255,7 +255,7 @@ bind_names ( symbol_t *function, node_t *root ) {
 		return;
 	} else {
 		switch (root->type) {
-		node_t *nameList;
+		node_t *first_born;
 		symbol_t *entry;
 		
 		case BLOCK:
@@ -267,9 +267,9 @@ bind_names ( symbol_t *function, node_t *root ) {
 			break;
 		
 		case DECLARATION:
-			nameList = root->children[0];
-			for (int64_t j=0; j < nameList->n_children; j++) {	//check if just int64 works too
-				node_t *varname = nameList->children[j];
+			first_born = root->children[0];
+			for (int64_t j=0; j < first_born->n_children; j++) {
+				node_t *varname = first_born->children[j];
 				size_t local_num = tlhash_size(function->locals) - function->nparms;
 				symbol_t *symbol = malloc(sizeof(symbol_t));
 				*symbol = (symbol_t) {
@@ -288,7 +288,7 @@ bind_names ( symbol_t *function, node_t *root ) {
 		case IDENTIFIER_DATA:
 			entry = lookup_local(root->data);
 			if (entry == NULL) {
-				tlhash_lookup(function->locals, root->data, strlen(root->data), (void**) &entry);
+				tlhash_lookup(function->locals, root->data, strlen(root->data), (void**) &entry); //We have to check in function->locals and global_names before we can crash
 			}
 			if (entry == NULL) {
 				tlhash_lookup(global_names, root->data, strlen(root->data), (void**) &entry);
@@ -323,11 +323,13 @@ destroy_symtab ( void ){
 	for (size_t i=0; i< stringc; i++)
 		free(string_list[i]);
 	free(string_list);
+
 	size_t size_globals = tlhash_size(global_names);
 	symbol_t *global_list[size_globals];
 	tlhash_values(global_names, (void**) &global_list);
 	for (size_t j=0; j < size_globals; j++) {
 		symbol_t *glbl = global_list[j];
+
 		if (glbl->locals != NULL) {
 			size_t size_locals = tlhash_size(glbl->locals);
 			symbol_t *locals[size_locals];
@@ -338,6 +340,7 @@ destroy_symtab ( void ){
 			tlhash_finalize(glbl->locals);
 			free(glbl->locals);
 		}
+
 		free(glbl);
 	}
 	tlhash_finalize(global_names);
