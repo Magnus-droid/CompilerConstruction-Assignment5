@@ -1,4 +1,4 @@
-test123456789 PROGRAM
+ PROGRAM
  GLOBAL_LIST
   FUNCTION
    IDENTIFIER_DATA(unary_minus_precedence)
@@ -28,7 +28,7 @@ test123456789 PROGRAM
         NUMBER_DATA(3)
      RETURN_STATEMENT
       NUMBER_DATA(0)
-There should have been a create_symbol_table call now...String table:
+String table:
 -- 
 Globals:
 unary_minus_precedence: function 0:

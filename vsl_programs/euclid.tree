@@ -1,4 +1,4 @@
-test123456789 PROGRAM
+ PROGRAM
  GLOBAL_LIST
   FUNCTION
    IDENTIFIER_DATA(euclid)
@@ -82,7 +82,7 @@ test123456789 PROGRAM
        IDENTIFIER_DATA(a)
      RETURN_STATEMENT
       IDENTIFIER_DATA(g)
-There should have been a create_symbol_table call now...String table:
+String table:
 0: "Greatest common divisor of"
 1: "and"
 2: "is"

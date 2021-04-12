@@ -1,4 +1,4 @@
-test123456789 PROGRAM
+ PROGRAM
  GLOBAL_LIST
   FUNCTION
    IDENTIFIER_DATA(main)
@@ -69,7 +69,7 @@ test123456789 PROGRAM
        STRING_DATA("is a prime factor")
      RETURN_STATEMENT
       NUMBER_DATA(0)
-There should have been a create_symbol_table call now...String table:
+String table:
 0: "is a prime factor"
 -- 
 Globals:

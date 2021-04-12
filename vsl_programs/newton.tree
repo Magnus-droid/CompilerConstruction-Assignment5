@@ -1,4 +1,4 @@
-test123456789 PROGRAM
+ PROGRAM
  GLOBAL_LIST
   FUNCTION
    IDENTIFIER_DATA(newton)
@@ -57,7 +57,7 @@ test123456789 PROGRAM
         EXPRESSION_LIST
          IDENTIFIER_DATA(n)
          IDENTIFIER_DATA(next)
-There should have been a create_symbol_table call now...String table:
+String table:
 0: "The square root of"
 1: "is"
 -- 
