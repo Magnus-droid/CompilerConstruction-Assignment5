@@ -1,0 +1,196 @@
+test123456789 PROGRAM
+ GLOBAL_LIST
+  FUNCTION
+   IDENTIFIER_DATA(main)
+   (nil)
+   BLOCK
+    DECLARATION_LIST
+     DECLARATION
+      VARIABLE_LIST
+       IDENTIFIER_DATA(a)
+       IDENTIFIER_DATA(_a1)
+       IDENTIFIER_DATA(a_2)
+    STATEMENT_LIST
+     PRINT_STATEMENT
+      STRING_DATA("Hello, world!")
+     PRINT_STATEMENT
+      STRING_DATA("")
+     PRINT_STATEMENT
+      STRING_DATA("Hello, \"world\"!")
+     ASSIGNMENT_STATEMENT
+      IDENTIFIER_DATA(_a1)
+      NUMBER_DATA(10)
+     ASSIGNMENT_STATEMENT
+      IDENTIFIER_DATA(a_2)
+      NUMBER_DATA(2)
+     ASSIGNMENT_STATEMENT
+      IDENTIFIER_DATA(a)
+      EXPRESSION(+)
+       IDENTIFIER_DATA(_a1)
+       IDENTIFIER_DATA(a_2)
+     PRINT_STATEMENT
+      IDENTIFIER_DATA(_a1)
+      STRING_DATA("+")
+      IDENTIFIER_DATA(a_2)
+      STRING_DATA(":=")
+      IDENTIFIER_DATA(a)
+     ASSIGNMENT_STATEMENT
+      IDENTIFIER_DATA(a)
+      EXPRESSION(-)
+       IDENTIFIER_DATA(_a1)
+       IDENTIFIER_DATA(a_2)
+     PRINT_STATEMENT
+      IDENTIFIER_DATA(_a1)
+      STRING_DATA("-")
+      IDENTIFIER_DATA(a_2)
+      STRING_DATA(":=")
+      IDENTIFIER_DATA(a)
+     ASSIGNMENT_STATEMENT
+      IDENTIFIER_DATA(a)
+      EXPRESSION(+)
+       IDENTIFIER_DATA(_a1)
+       EXPRESSION(-)
+        IDENTIFIER_DATA(a_2)
+     PRINT_STATEMENT
+      IDENTIFIER_DATA(_a1)
+      STRING_DATA("+ (-")
+      IDENTIFIER_DATA(a_2)
+      STRING_DATA(") :=")
+      IDENTIFIER_DATA(a)
+     ASSIGNMENT_STATEMENT
+      IDENTIFIER_DATA(a)
+      EXPRESSION(*)
+       IDENTIFIER_DATA(_a1)
+       IDENTIFIER_DATA(a_2)
+     PRINT_STATEMENT
+      IDENTIFIER_DATA(_a1)
+      STRING_DATA("*")
+      IDENTIFIER_DATA(a_2)
+      STRING_DATA(":=")
+      IDENTIFIER_DATA(a)
+     ASSIGNMENT_STATEMENT
+      IDENTIFIER_DATA(a)
+      EXPRESSION(/)
+       IDENTIFIER_DATA(_a1)
+       IDENTIFIER_DATA(a_2)
+     PRINT_STATEMENT
+      IDENTIFIER_DATA(_a1)
+      STRING_DATA("/")
+      IDENTIFIER_DATA(a_2)
+      STRING_DATA(":=")
+      IDENTIFIER_DATA(a)
+     IF_STATEMENT
+      RELATION(>)
+       IDENTIFIER_DATA(a)
+       NUMBER_DATA(0)
+      PRINT_STATEMENT
+       IDENTIFIER_DATA(a)
+     WHILE_STATEMENT
+      RELATION(>)
+       IDENTIFIER_DATA(a)
+       NUMBER_DATA(0)
+      BLOCK
+       STATEMENT_LIST
+        IF_STATEMENT
+         RELATION(>)
+          EXPRESSION(-)
+           IDENTIFIER_DATA(a)
+           NUMBER_DATA(3)
+          NUMBER_DATA(0)
+         ASSIGNMENT_STATEMENT
+          IDENTIFIER_DATA(a)
+          EXPRESSION(-)
+           IDENTIFIER_DATA(a)
+           NUMBER_DATA(1)
+         BLOCK
+          STATEMENT_LIST
+           ASSIGNMENT_STATEMENT
+            IDENTIFIER_DATA(a)
+            EXPRESSION(-)
+             IDENTIFIER_DATA(a)
+             NUMBER_DATA(1)
+           PRINT_STATEMENT
+            STRING_DATA("Skip...")
+           NULL_STATEMENT
+        PRINT_STATEMENT
+         IDENTIFIER_DATA(a)
+     RETURN_STATEMENT
+      NUMBER_DATA(0)
+There should have been a create_symbol_table call now...String table:
+0: "Hello, world!"
+1: ""
+2: "Hello, \"world\"!"
+3: "+"
+4: ":="
+5: "-"
+6: ":="
+7: "+ (-"
+8: ") :="
+9: "*"
+10: ":="
+11: "/"
+12: ":="
+13: "Skip..."
+-- 
+Globals:
+main: function 0:
+	3 local variables, 0 are parameters:
+	a: local var 0
+	a_2: local var 2
+	_a1: local var 1
+-- 
+Linked string 0
+Linked string 1
+Linked string 2
+Linked local var 1 ('_a1')
+Linked local var 2 ('a_2')
+Linked local var 0 ('a')
+Linked local var 1 ('_a1')
+Linked local var 2 ('a_2')
+Linked local var 1 ('_a1')
+Linked string 3
+Linked local var 2 ('a_2')
+Linked string 4
+Linked local var 0 ('a')
+Linked local var 0 ('a')
+Linked local var 1 ('_a1')
+Linked local var 2 ('a_2')
+Linked local var 1 ('_a1')
+Linked string 5
+Linked local var 2 ('a_2')
+Linked string 6
+Linked local var 0 ('a')
+Linked local var 0 ('a')
+Linked local var 1 ('_a1')
+Linked local var 2 ('a_2')
+Linked local var 1 ('_a1')
+Linked string 7
+Linked local var 2 ('a_2')
+Linked string 8
+Linked local var 0 ('a')
+Linked local var 0 ('a')
+Linked local var 1 ('_a1')
+Linked local var 2 ('a_2')
+Linked local var 1 ('_a1')
+Linked string 9
+Linked local var 2 ('a_2')
+Linked string 10
+Linked local var 0 ('a')
+Linked local var 0 ('a')
+Linked local var 1 ('_a1')
+Linked local var 2 ('a_2')
+Linked local var 1 ('_a1')
+Linked string 11
+Linked local var 2 ('a_2')
+Linked string 12
+Linked local var 0 ('a')
+Linked local var 0 ('a')
+Linked local var 0 ('a')
+Linked local var 0 ('a')
+Linked local var 0 ('a')
+Linked local var 0 ('a')
+Linked local var 0 ('a')
+Linked local var 0 ('a')
+Linked local var 0 ('a')
+Linked string 13
+Linked local var 0 ('a')
