@@ -149,32 +149,32 @@ find_globals ( void )
 	tlhash_init(global_names, 32);
 	string_list = malloc(n_string_list * sizeof(char*));
 	size_t n_functions = 0;
-	node_t *global_list = root->children[0];
+	node_t *first_born = root->children[0];
 
-	for(int64_t i=0; i < global_list->n_children; i++) {
-		node_t *global = global_list->children[i];
+	for(int64_t i=0; i < first_born->n_children; i++) {
+		node_t *grand_child = first_born->children[i];
 		node_t *name_list;
 		symbol_t *symbol;
-		switch(global->type) {
+		switch(grand_child->type) {
 			case FUNCTION:
 				symbol = malloc(sizeof(symbol_t));
 				*symbol = (symbol_t) {
 					.type = SYM_FUNCTION,
-					.name = global->children[0]->data,
-					.node = global->children[2],
+					.name = grand_child->children[0]->data,
+					.node = grand_child->children[2],
 					.seq = n_functions,
 					.nparms = 0,
 					.locals = malloc(sizeof(tlhash_t))
 				};
 				n_functions++;
 				tlhash_init(symbol->locals, 32);
-				if(global->children[1] != NULL) { //skjekk om funksjonen har parametere
-					symbol->nparms = global->children[1]->n_children;
+				if(grand_child->children[1] != NULL) {
+					symbol->nparms = grand_child->children[1]->n_children;
 					for(int64_t j=0; j < symbol->nparms; j++) {
 						symbol_t *param =  malloc(sizeof(symbol_t));
 						*param = (symbol_t) {
 							.type = SYM_PARAMETER,
-							.name = global->children[1]->children[j]->data,
+							.name = grand_child->children[1]->children[j]->data,
 							.node = NULL,
 							.seq = j,
 							.nparms = 0,
@@ -187,7 +187,7 @@ find_globals ( void )
 				break;
 
 			case DECLARATION:
-				name_list = global->children[0];
+				name_list = grand_child->children[0];
 				for(int64_t k=0; k < name_list->n_children; k++) {
 					symbol = malloc(sizeof(symbol_t));
 					*symbol = (symbol_t) {
@@ -294,7 +294,7 @@ bind_names ( symbol_t *function, node_t *root ) {
 				tlhash_lookup(global_names, root->data, strlen(root->data), (void**) &entry);
 			}
 			if (entry == NULL) {
-				fprintf(stderr, "Identifier '%s' does noe exist in this scope\n", (char *) root->data);
+				fprintf(stderr, "Identifier '%s' not in scope\n", (char *) root->data);
 				exit(EXIT_FAILURE);
 			}
 			root->entry = entry;
